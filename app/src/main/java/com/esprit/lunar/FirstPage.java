@@ -25,7 +25,7 @@ public class FirstPage extends AppCompatActivity {
             }
         });
 
-        button1 = (Button) findViewById(R.id.button);
+        button1 = (Button) findViewById(R.id.signup);
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
