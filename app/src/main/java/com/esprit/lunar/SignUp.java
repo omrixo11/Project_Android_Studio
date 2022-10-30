@@ -75,7 +75,6 @@ public class SignUp extends AppCompatActivity {
                 } }
         });
 
-
     }
 
     private String getTodaysDate() {
@@ -140,7 +139,6 @@ public class SignUp extends AppCompatActivity {
 
         return "JAN";
     }
-
 
     public void openDatePicker(View view) {
 
