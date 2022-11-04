@@ -3,6 +3,7 @@ package com.esprit.lunar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,40 +12,39 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     EditText email, password;
-    Button btnlogin;
+    Button btnLogin;
     DBHelper DB;
+    SharedPreferences preferences;
+    SharedPreferences.Editor editor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        preferences = getSharedPreferences( "MyPreferences", MODE_PRIVATE);
+        editor = preferences.edit();
 
-        email = (EditText) findViewById(R.id.email2);
-        password = (EditText) findViewById(R.id.password);
-        btnlogin = (Button) findViewById(R.id.signup);
-        DB = new DBHelper(this);
+        if (preferences.contains("saved_email")){
 
+            Intent intent = new Intent(MainActivity.this, HomePage.class);
+            startActivity(intent);
+        }
+        else {
 
-        btnlogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                String emaill = email.getText().toString();
-                String pass = password.getText().toString();
-
-                if(emaill.equals("")||pass.equals(""))
-                    Toast.makeText(MainActivity.this, "Please enter all the fields", Toast.LENGTH_SHORT).show();
-                else{
-                    Boolean checkuserpass = DB.checkusernamepassword(emaill, pass);
-                    if(checkuserpass==true){
-                        Toast.makeText(MainActivity.this, "Sign in successfull", Toast.LENGTH_SHORT).show();
-                        Intent intent  = new Intent(getApplicationContext(), HomePage.class);
-                        startActivity(intent);
-                    }else{
-                        Toast.makeText(MainActivity.this, "Invalid Credentials", Toast.LENGTH_SHORT).show();
-                    }
+            email = findViewById(R.id.email);
+            password = findViewById(R.id.password);
+            btnLogin = findViewById(R.id.btnLogin);
+            btnLogin.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String my_email = email.getText().toString();
+                    String my_password = password.getText().toString();
+                    editor.putString("saved_email", my_email);
+                    editor.putString("saved_password", my_password);
+                    editor.commit();
+                    Intent intent = new Intent(MainActivity.this, HomePage.class);
+                    startActivity(intent);
                 }
-            }
-        });
-
+            });
+        }
     }
 }
