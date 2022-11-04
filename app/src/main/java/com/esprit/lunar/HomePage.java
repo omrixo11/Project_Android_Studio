@@ -4,10 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 
 import com.esprit.lunar.databinding.ActivityMainBinding;
@@ -19,7 +22,7 @@ public class HomePage extends AppCompatActivity {
 
 
     BottomNavigationView navigationView;
-
+    private Button buttonn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,4 +65,6 @@ public class HomePage extends AppCompatActivity {
             }
         });
     }
+
+
 }
