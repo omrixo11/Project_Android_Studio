@@ -46,7 +46,7 @@
     </GridLayout>
 
     <Button
-        android:id="@+id/logout"
+        android:id="@+id/btnLogout"
         android:layout_width="125dp"
         android:layout_height="33dp"
         android:background="@drawable/button_background"
