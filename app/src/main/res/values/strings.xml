@@ -2,5 +2,32 @@
     <string name="app_name">Lunar</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="carBrands">
+        <item>Audi</item>
+        <item>Alfa Romeo</item>
+        <item>Aston Martin</item>
+        <item>BMW</item>
+        <item>Bentley</item>
+        <item>Bugatti</item>
+        <item>Chevrolet</item>
+        <item>Citroen</item>
+        <item>Dodge</item>
+        <item>Dacia</item>
+        <item>DS</item>
+        <item>Ferrari</item>
+        <item>GMC</item>
+        <item>Hyundai</item>
+    </string-array>
 
+    <string-array name="carModel">
+        <item>Test1</item>
+        <item>Test2</item>
+        <item>Test3</item>
+    </string-array>
+
+    <string-array name="carYear">
+        <item>2022</item>
+        <item>2021</item>
+        <item>2020</item>
+    </string-array>
 </resources>
