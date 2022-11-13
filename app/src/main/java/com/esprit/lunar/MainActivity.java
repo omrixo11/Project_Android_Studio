@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     DBHelper DB;
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

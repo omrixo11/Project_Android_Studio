@@ -7,19 +7,24 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBHelper extends SQLiteOpenHelper {
-    public static final String DBNAME = "Login.db";
-    public DBHelper(Context context) {
-        super(context, "Login.db", null, 1);
+
+    public static final String DBNAME = "MyDB.db";
+
+    public DBHelper(Context context ) {
+        super(context, "MyDB.db", null, 1);
     }
+
 
     @Override
     public void onCreate(SQLiteDatabase MyDB) {
-        MyDB.execSQL("create Table users(emaill TEXT primary key, password TEXT)");
+        MyDB.execSQL("create Table users (emaill TEXT primary key, password TEXT)");
+        MyDB.execSQL("create Table partsList(id integer primary key, brand TEXT, year TEXT, name TEXT, serialNumber TEXT, quantity TEXT)");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase MyDB, int i, int i1) {
         MyDB.execSQL("drop Table if exists users");
+        MyDB.execSQL("drop Table if exists partsList");
     }
 
     public Boolean insertData(String emaill, String password){
@@ -50,4 +55,5 @@ public class DBHelper extends SQLiteOpenHelper {
         else
             return false;
     }
+
 }

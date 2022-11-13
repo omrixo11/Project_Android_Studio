@@ -8,48 +8,35 @@
     tools:context=".PlusFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <Spinner
-        android:id="@+id/spinnerCarBrand"
+    <EditText
+        android:id="@+id/CarBrand"
         android:layout_width="250dp"
-        android:layout_height="33dp"
+        android:layout_height="40dp"
         android:layout_marginTop="112dp"
-        android:background="@drawable/button_background"
-        android:text="Car Brand"
+        android:background="@drawable/textedit_background"
+        android:hint="Car Brand"
         android:textAlignment="center"
         android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:textSize="14sp"
         tools:ignore="TouchTargetSizeCheck"/>
 
-    <Spinner
-        android:id="@+id/spinnerCarModel"
+    <EditText
+        android:id="@+id/CarYear"
         android:layout_width="250dp"
-        android:layout_height="33dp"
+        android:layout_height="40dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/button_background"
-        android:text="Car Model"
+        android:background="@drawable/textedit_background"
+        android:hint="Car year"
         android:textAlignment="center"
         android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerCarBrand"
-        tools:ignore="TouchTargetSizeCheck" />
-
-    <Spinner
-        android:id="@+id/spinnerCarYear"
-        android:layout_width="250dp"
-        android:layout_height="33dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/button_background"
-        android:text="Car Model"
-        android:textAlignment="center"
-        android:textColor="@android:color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerCarModel"
+        app:layout_constraintTop_toBottomOf="@+id/CarBrand"
+        android:textSize="14sp"
         tools:ignore="TouchTargetSizeCheck" />
 
     <EditText
@@ -67,7 +54,7 @@
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerCarYear"
+        app:layout_constraintTop_toBottomOf="@+id/CarYear"
         tools:ignore="TouchTargetSizeCheck" />
 
     <EditText

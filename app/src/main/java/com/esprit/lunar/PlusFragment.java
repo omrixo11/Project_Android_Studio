@@ -1,5 +1,8 @@
 package com.esprit.lunar;
 
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
@@ -7,11 +10,26 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
 
-public class PlusFragment extends Fragment implements AdapterView.OnItemSelectedListener {
+
+public class PlusFragment extends Fragment {
+
+    int id=0;
+    SQLiteDatabase sqLiteDatabase;
+    DBHelper MyDB;
+    Button btnAdd;
+    EditText brand;
+    EditText year;
+    EditText name;
+    EditText serialNumber;
+    EditText quantity;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -19,41 +37,42 @@ public class PlusFragment extends Fragment implements AdapterView.OnItemSelected
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_plus, container, false);
 
-        Spinner spinnerBrand = v.findViewById(R.id.spinnerCarBrand);
-        Spinner spinnerModel = v.findViewById(R.id.spinnerCarModel);
-        Spinner spinnerYear = v.findViewById(R.id.spinnerCarYear);
+
+        brand = v.findViewById(R.id.CarBrand);
+        year =  v.findViewById(R.id.CarYear);
+        name = v.findViewById(R.id.nomPiece);
+        serialNumber = v.findViewById(R.id.numPiece);
+        quantity = v.findViewById(R.id.quantity);
+        btnAdd = v.findViewById(R.id.addtostock);
+        MyDB = new DBHelper(getActivity());
 
 
-        ArrayAdapter<CharSequence> adapterBrand = ArrayAdapter.createFromResource(getActivity().getBaseContext(),R.array.carBrands, android.R.layout.simple_spinner_item);
-        adapterBrand.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        ArrayAdapter<CharSequence> adapterModel = ArrayAdapter.createFromResource(getActivity().getBaseContext(),R.array.carModel, android.R.layout.simple_spinner_item);
-        adapterModel.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-        ArrayAdapter<CharSequence> adapterYear = ArrayAdapter.createFromResource(getActivity().getBaseContext(),R.array.carYear, android.R.layout.simple_spinner_item);
-        adapterYear.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                ContentValues contentValues = new ContentValues();
+                contentValues.put("brand", brand.getText().toString());
+                sqLiteDatabase=MyDB.getWritableDatabase();
+                Long recid=sqLiteDatabase.insert("partsList",null,contentValues);
+               if (recid!=null && brand.length()!=0 && year.length()!=0 && name.length()!=0 && serialNumber.length()!=0 && quantity.length()!=0) {
+                   Toast.makeText(getActivity(), "Data inserted successfully", Toast.LENGTH_SHORT).show();
+               clear();
+               }else {
+                   Toast.makeText(getActivity(), "Please fill all the fields", Toast.LENGTH_SHORT).show();
 
-
-        spinnerBrand.setAdapter(adapterBrand);
-        spinnerBrand.setOnItemSelectedListener(this);
-
-        spinnerModel.setAdapter(adapterModel);
-        spinnerModel.setOnItemSelectedListener(this);
-
-        spinnerYear.setAdapter(adapterYear);
-        spinnerYear.setOnItemSelectedListener(this);
-
+               }
+            }
+        });
         return v;
     }
-
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        String text = parent.getItemAtPosition(position).toString();
-        Toast.makeText(parent.getContext(),text,Toast.LENGTH_SHORT).show();
+    private void clear() {
+        brand.setText("");
+        year.setText("");
+        name.setText("");
+        serialNumber.setText("");
+        quantity.setText("");
     }
 
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
 }
