@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.media.Image;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -49,13 +50,20 @@ public class HomeFragment extends Fragment {
 
         StoreDataInArrays();
 
-        customAdapter = new CustomAdapter(getActivity(),brand, name, year, serialNumber, quantity);
+        customAdapter = new CustomAdapter(getActivity(), getActivity(),brand, name, year, serialNumber, quantity);
         recyclerView.setAdapter(customAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-
         return v;
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 1) {
+        }
+    }
+
     void StoreDataInArrays(){
           Cursor cursor = MyDB.getData();
           if (cursor.getCount() == 0){
