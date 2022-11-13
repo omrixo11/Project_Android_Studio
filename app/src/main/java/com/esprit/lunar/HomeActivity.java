@@ -1,5 +1,6 @@
 package com.esprit.lunar;
 
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -21,10 +22,9 @@ public class HomeActivity extends AppCompatActivity {
                 openSignIn();
             }
         });
-
     }
     private void openSignIn() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
-} //gggggg
+}

@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
+
 public class DBHelper extends SQLiteOpenHelper {
 
     public static final String DBNAME = "MyDB.db";
@@ -18,7 +20,7 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase MyDB) {
         MyDB.execSQL("create Table users (emaill TEXT primary key, password TEXT)");
-        MyDB.execSQL("create Table partsList(id integer primary key, brand TEXT, year TEXT, name TEXT, serialNumber TEXT, quantity TEXT)");
+        MyDB.execSQL("create Table partsList(brand TEXT, year TEXT, name TEXT, serialNumber TEXT primary key, quantity TEXT)");
     }
 
     @Override
@@ -54,6 +56,12 @@ public class DBHelper extends SQLiteOpenHelper {
             return true;
         else
             return false;
+    }
+
+    public Cursor getData(){
+        SQLiteDatabase MyDB = this.getReadableDatabase();
+        Cursor cursor = MyDB.rawQuery("Select * from partsList",null);
+        return cursor;
     }
 
 }

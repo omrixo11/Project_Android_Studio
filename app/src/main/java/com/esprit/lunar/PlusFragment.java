@@ -34,7 +34,6 @@ public class PlusFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_plus, container, false);
 
 
@@ -47,13 +46,17 @@ public class PlusFragment extends Fragment {
         MyDB = new DBHelper(getActivity());
 
 
-
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 ContentValues contentValues = new ContentValues();
                 contentValues.put("brand", brand.getText().toString());
+                contentValues.put("year", year.getText().toString());
+                contentValues.put("name", name.getText().toString());
+                contentValues.put("serialNumber", serialNumber.getText().toString());
+                contentValues.put("quantity", quantity.getText().toString());
+
                 sqLiteDatabase=MyDB.getWritableDatabase();
                 Long recid=sqLiteDatabase.insert("partsList",null,contentValues);
                if (recid!=null && brand.length()!=0 && year.length()!=0 && name.length()!=0 && serialNumber.length()!=0 && quantity.length()!=0) {
@@ -61,7 +64,6 @@ public class PlusFragment extends Fragment {
                clear();
                }else {
                    Toast.makeText(getActivity(), "Please fill all the fields", Toast.LENGTH_SHORT).show();
-
                }
             }
         });
