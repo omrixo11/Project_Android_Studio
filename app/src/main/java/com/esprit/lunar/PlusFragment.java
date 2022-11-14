@@ -1,10 +1,14 @@
 package com.esprit.lunar;
 
+import static com.esprit.lunar.DBHelper.TABLE_NAME;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+
 import androidx.fragment.app.Fragment;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +25,7 @@ import java.util.List;
 
 public class PlusFragment extends Fragment {
 
-    int id=0;
+    int id = 0;
     SQLiteDatabase sqLiteDatabase;
     DBHelper MyDB;
     Button btnAdd;
@@ -38,7 +42,7 @@ public class PlusFragment extends Fragment {
 
 
         brand = v.findViewById(R.id.CarBrand);
-        year =  v.findViewById(R.id.CarYear);
+        year = v.findViewById(R.id.CarYear);
         name = v.findViewById(R.id.nomPiece);
         serialNumber = v.findViewById(R.id.numPiece);
         quantity = v.findViewById(R.id.quantity);
@@ -50,25 +54,24 @@ public class PlusFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                ContentValues contentValues = new ContentValues();
-                contentValues.put("brand", brand.getText().toString());
-                contentValues.put("year", year.getText().toString());
-                contentValues.put("name", name.getText().toString());
-                contentValues.put("serialNumber", serialNumber.getText().toString());
-                contentValues.put("quantity", quantity.getText().toString());
+                DBHelper myDB = new DBHelper(getActivity());
+                if (name.length() == 0 || brand.length() == 0 || year.length() == 0 || serialNumber.length() == 0 || quantity.length() == 0) {
+                    Toast.makeText(getActivity(), "Please fill all the fields", Toast.LENGTH_SHORT).show();
+                } else {
+                    myDB.addProduct(brand.getText().toString().trim(),
+                            Integer.valueOf(year.getText().toString().trim()),
+                            name.getText().toString().trim(),
+                            Integer.valueOf(serialNumber.getText().toString().trim()),
+                            Integer.valueOf(quantity.getText().toString().trim()));
+                    clear();
 
-                sqLiteDatabase=MyDB.getWritableDatabase();
-                Long recid=sqLiteDatabase.insert("partsList",null,contentValues);
-               if (recid!=null && brand.length()!=0 && year.length()!=0 && name.length()!=0 && serialNumber.length()!=0 && quantity.length()!=0) {
-                   Toast.makeText(getActivity(), "Data inserted successfully", Toast.LENGTH_SHORT).show();
-               clear();
-               }else {
-                   Toast.makeText(getActivity(), "Please fill all the fields", Toast.LENGTH_SHORT).show();
-               }
+                }
             }
+
         });
         return v;
     }
+
     private void clear() {
         brand.setText("");
         year.setText("");

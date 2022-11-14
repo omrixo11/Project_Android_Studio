@@ -17,13 +17,14 @@ import java.util.ArrayList;
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
 
     private Context context;
-    private ArrayList brand,year,name,serialNumber,quantity;
+    private ArrayList brand,year,name,serialNumber,quantity,product_id;
     Activity activity;
 
-    CustomAdapter(Activity activity, Context context,ArrayList brand,ArrayList year,ArrayList name, ArrayList serialNumber, ArrayList quantity){
+    CustomAdapter(Activity activity, Context context,ArrayList product_id, ArrayList brand,ArrayList year,ArrayList name, ArrayList serialNumber, ArrayList quantity){
 
         this.activity = activity;
         this.context = context;
+        this.product_id = product_id;
         this.brand = brand;
         this.year = year;
         this.name = name;
@@ -42,21 +43,27 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     @Override
     public void onBindViewHolder(@NonNull CustomAdapter.MyViewHolder holder, int position) {
 
+        holder.Product_id.setText(String.valueOf(brand.get(position)));
         holder.Brand.setText(String.valueOf(brand.get(position)));
         holder.Year.setText(String.valueOf(year.get(position)));
         holder.Name.setText(String.valueOf(name.get(position)));
         holder.SerialNumber.setText(String.valueOf(serialNumber.get(position)));
         holder.Quantity.setText(String.valueOf(quantity.get(position)));
+
         holder.mainLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent intent = new Intent (context, UpdateActivity.class);
+                intent.putExtra("id",String.valueOf(product_id.get(position)));
                 intent.putExtra("brand",String.valueOf(brand.get(position)));
                 intent.putExtra("year",String.valueOf(year.get(position)));
                 intent.putExtra("name",String.valueOf(name.get(position)));
                 intent.putExtra("serialNumber",String.valueOf(serialNumber.get(position)));
                 intent.putExtra("quantity",String.valueOf(quantity.get(position)));
                 activity.startActivityForResult(intent,1);
+
+
             }
         });
     }
@@ -67,10 +74,11 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView Brand,Year,Name,SerialNumber,Quantity;
+        TextView Product_id, Brand,Year,Name,SerialNumber,Quantity;
         LinearLayout mainLayout;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
+            Product_id = itemView.findViewById(R.id.Product_id);
             Brand = itemView.findViewById(R.id.Brand);
             Year = itemView.findViewById(R.id.Year);
             Name = itemView.findViewById(R.id.Name);

@@ -7,21 +7,23 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-
 public class DBHelper extends SQLiteOpenHelper {
 
     private Context context;
-    public static final String DBNAME = "MyDB.db";
-    private static final String TABLE_NAME = "partsList";
+    private static final String DBNAME = "MyDB.db";
+    private static final int DATABASE_VERSION = 1;
+
+    static final String TABLE_NAME = "partsList";
+    private static final String COLUMN_ID = "_id";
     private static final String COLUMN_BRAND = "brand";
     private static final String COLUMN_YEAR = "year";
     private static final String COLUMN_NAME = "name";
-    private static final String COLUMN_SERIALNUMBER = "_serialNumber";
+    private static final String COLUMN_SERIALNUMBER = "serialNumber";
     private static final String COLUMN_QUANTITY = "quantity";
 
     DBHelper(Context context ) {
-        super(context, "MyDB.db", null, 1);
+        super(context, DBNAME, null, DATABASE_VERSION);
+        this.context = context;
     }
 
 
@@ -30,18 +32,20 @@ public class DBHelper extends SQLiteOpenHelper {
         MyDB.execSQL("create Table users (emaill TEXT primary key, password TEXT)");
 
         String query = "CREATE TABLE " + TABLE_NAME +
-                " (" + COLUMN_BRAND + " TEXT, " +
-                COLUMN_YEAR + " TEXT, " +
+                " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_BRAND + " TEXT, " +
+                COLUMN_YEAR + " INTEGER, " +
                 COLUMN_NAME + " TEXT, " +
-                COLUMN_SERIALNUMBER + " INTEGER PRIMARY KEY AUTOINCREMENT);" +
-                COLUMN_QUANTITY + " TEXT);";
+                COLUMN_SERIALNUMBER + " INTEGER, " +
+                COLUMN_QUANTITY + " INTEGER);";
         MyDB.execSQL(query);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase MyDB, int i, int i1) {
         MyDB.execSQL("drop Table if exists users");
-        MyDB.execSQL("drop Table if exists partsList");
+        MyDB.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+        onCreate(MyDB);
     }
 
     public Boolean insertData(String emaill, String password){
@@ -79,19 +83,49 @@ public class DBHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
-    void updateData(String brand, String year, String name, String row_serialNumber, String quantity){
+    void addProduct(String brand, int year, String name, int serialNumber, int quantity){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(COLUMN_BRAND, brand);
+        cv.put(COLUMN_YEAR, year);
+        cv.put(COLUMN_NAME, name);
+        cv.put(COLUMN_SERIALNUMBER, serialNumber);
+        cv.put(COLUMN_QUANTITY, quantity);
+        long result = db.insert(TABLE_NAME,null, cv);
+        if(result == -1){
+            Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
+        }else {
+            Toast.makeText(context, "Added Successfully!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    void updateData(String row_id, String brand, String year, String name, String serialNumber, String quantity){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(COLUMN_BRAND,brand);
         cv.put(COLUMN_YEAR,year);
         cv.put(COLUMN_NAME,name);
+        cv.put(COLUMN_SERIALNUMBER,serialNumber);
         cv.put(COLUMN_QUANTITY,quantity);
 
-       long result = db.update("partsList", cv,"_serialNumber=?",new String[]{row_serialNumber});
+       long result = db.update(TABLE_NAME, cv,"_id=?",new String[]{row_id});
     if (result==-1){
         Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
     }else {
         Toast.makeText(context, "Updated Successfully!", Toast.LENGTH_SHORT).show();
     }
     }
+
+    public void deleteProduct(String row_id){
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+       long result = sqLiteDatabase.delete(TABLE_NAME,"_id=?", new String[]{row_id});
+       if (result == -1){
+           Toast.makeText(context, "Failed to delete", Toast.LENGTH_SHORT).show();
+       }else
+       {
+           Toast.makeText(context, "Deleted", Toast.LENGTH_SHORT).show();
+       }
+    }
+
 }
