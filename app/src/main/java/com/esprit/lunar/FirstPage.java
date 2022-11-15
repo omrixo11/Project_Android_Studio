@@ -11,13 +11,14 @@ public class FirstPage extends AppCompatActivity {
 
     private Button button2;
     private Button button1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first_page);
 
         button2 = (Button) findViewById(R.id.button2);
-        button2.setOnClickListener(new View.OnClickListener(){
+        button2.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -32,7 +33,7 @@ public class FirstPage extends AppCompatActivity {
                 openSignIn();
             }
         });
-        }
+    }
 
     private void openSignIn() {
         Intent intent = new Intent(this, MainActivity.class);

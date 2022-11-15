@@ -1,12 +1,9 @@
 package com.esprit.lunar;
 
-import android.content.Intent;
+import android.content.Context;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.media.Image;
 import android.os.Bundle;
 
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,31 +12,31 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
-import android.widget.TextView;
+import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class HomeFragment extends Fragment {
 
+
     DBHelper MyDB;
-    SQLiteDatabase sqLiteDatabase;
-    ArrayList<String> brand, year, name, serialNumber, quantity, product_id,price;
-    CustomAdapter customAdapter;
+    ArrayList<String> brand, year, name, serialNumber, quantity, product_id, price;
+    DisplayAdapter displayAdapter;
     RecyclerView recyclerView;
     SwipeRefreshLayout swipeRefreshLayout;
+    Button btnCard;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_home, container, false);
 
+        btnCard = v.findViewById(R.id.btnCard);
         swipeRefreshLayout = v.findViewById(R.id.swiperLayout);
         recyclerView = v.findViewById(R.id.recyclerView);
         MyDB = new DBHelper(getActivity());
@@ -54,20 +51,22 @@ public class HomeFragment extends Fragment {
 
         StoreDataInArrays();
 
-        customAdapter = new CustomAdapter(getActivity(), getActivity(), product_id, brand, name, year, serialNumber, quantity, price);
-        recyclerView.setAdapter(customAdapter);
+        displayAdapter = new DisplayAdapter(getActivity(), getActivity(), product_id, brand, name, year, serialNumber, quantity, price);
+        recyclerView.setAdapter(displayAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                customAdapter.notifyDataSetChanged();
+                displayAdapter.notifyDataSetChanged();
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
+
+
         return v;
     }
-
 
     void StoreDataInArrays() {
         Cursor cursor = MyDB.getData();
@@ -85,7 +84,6 @@ public class HomeFragment extends Fragment {
             }
         }
     }
-
 
 
 }

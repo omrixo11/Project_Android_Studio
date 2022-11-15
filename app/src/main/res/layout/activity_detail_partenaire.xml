@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#090909"
+    android:orientation="vertical"
+    tools:context=".DetailPartenaire">
+
+    <EditText
+        android:id="@+id/titre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Nom du Partenaire"
+        android:textAlignment="gravity"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#8BC34A" />
+
+    <EditText
+        android:id="@+id/nbrP"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Nombre du Piéces"
+        android:textAlignment="gravity"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#8BC34A" />
+
+    <Button
+        android:id="@+id/mod"
+        android:layout_width="match_parent"
+        android:background="@drawable/button_background"
+        android:text="Modifier"
+        android:textSize="20sp"
+        android:layout_height="70dp"
+        android:layout_marginTop="40dp"/>
+
+    <Button
+        android:id="@+id/supp"
+        android:layout_width="match_parent" android:background="@drawable/button_background"
+        android:layout_height="70dp"
+        android:layout_marginTop="40dp"
+        android:textSize="20sp"
+        android:text="Supprimer" />
+</LinearLayout>

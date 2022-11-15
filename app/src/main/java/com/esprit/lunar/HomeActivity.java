@@ -10,6 +10,7 @@ import android.widget.Button;
 
 public class HomeActivity extends AppCompatActivity {
     private Button buttonn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +24,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
     }
+
     private void openSignIn() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);

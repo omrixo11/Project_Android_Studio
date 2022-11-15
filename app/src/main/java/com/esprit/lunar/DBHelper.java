@@ -22,7 +22,8 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String COLUMN_QUANTITY = "quantity";
     private static final String COLUMN_PRICE = "price";
 
-    DBHelper(Context context ) {
+
+    DBHelper(Context context) {
         super(context, DBNAME, null, DATABASE_VERSION);
         this.context = context;
     }
@@ -31,7 +32,7 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase MyDB) {
         MyDB.execSQL("create Table users (emaill TEXT primary key, password TEXT)");
-
+        MyDB.execSQL("create Table my_library(COLUMN_TITLE TEXT primary key, COLUMN_DESC TEXT, COLUMN_NBR INTEGER)");
         String query = "CREATE TABLE " + TABLE_NAME +
                 " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 COLUMN_BRAND + " TEXT, " +
@@ -41,6 +42,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 COLUMN_QUANTITY + " INTEGER, " +
                 COLUMN_PRICE + " INTEGER);";
         MyDB.execSQL(query);
+
+
     }
 
     @Override
@@ -50,13 +53,13 @@ public class DBHelper extends SQLiteOpenHelper {
         onCreate(MyDB);
     }
 
-    public Boolean insertData(String emaill, String password){
+    public Boolean insertData(String emaill, String password) {
         SQLiteDatabase MyDB = this.getWritableDatabase();
-        ContentValues contentValues= new ContentValues();
+        ContentValues contentValues = new ContentValues();
         contentValues.put("emaill", emaill);
         contentValues.put("password", password);
         long result = MyDB.insert("users", null, contentValues);
-        if(result==-1) return false;
+        if (result == -1) return false;
         else
             return true;
     }
@@ -70,66 +73,101 @@ public class DBHelper extends SQLiteOpenHelper {
             return false;
     }
 
-    public Boolean checkusernamepassword(String emaill, String password){
+    public Boolean checkusernamepassword(String emaill, String password) {
         SQLiteDatabase MyDB = this.getWritableDatabase();
-        Cursor cursor = MyDB.rawQuery("Select * from users where emaill = ? and password = ?", new String[] {emaill,password});
-        if(cursor.getCount()>0)
+        Cursor cursor = MyDB.rawQuery("Select * from users where emaill = ? and password = ?", new String[]{emaill, password});
+        if (cursor.getCount() > 0)
             return true;
         else
             return false;
     }
 
-    public Cursor getData(){
+    public Cursor getData() {
         SQLiteDatabase MyDB = this.getReadableDatabase();
-        Cursor cursor = MyDB.rawQuery("Select * from partsList",null);
+        Cursor cursor = MyDB.rawQuery("Select * from partsList", null);
         return cursor;
     }
 
-    void addProduct(String brand, int year, String name, int serialNumber, int quantity, int price){
+    void addProduct(String brand, int year, String name, int serialNumber, int quantity, int price) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
-
         cv.put(COLUMN_BRAND, brand);
         cv.put(COLUMN_YEAR, year);
         cv.put(COLUMN_NAME, name);
         cv.put(COLUMN_SERIALNUMBER, serialNumber);
         cv.put(COLUMN_QUANTITY, quantity);
         cv.put(COLUMN_PRICE, price);
-        long result = db.insert(TABLE_NAME,null, cv);
+        long result = db.insert(TABLE_NAME, null, cv);
+        if (result == -1) {
+            Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(context, "Added Successfully!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    void updateData(String row_id, String brand, String year, String name, String serialNumber, String quantity, String price) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(COLUMN_BRAND, brand);
+        cv.put(COLUMN_YEAR, year);
+        cv.put(COLUMN_NAME, name);
+        cv.put(COLUMN_SERIALNUMBER, serialNumber);
+        cv.put(COLUMN_QUANTITY, quantity);
+        cv.put(COLUMN_PRICE, price);
+
+        long result = db.update(TABLE_NAME, cv, "_id=?", new String[]{row_id});
+        if (result == -1) {
+            Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(context, "Updated Successfully!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void deleteProduct(String row_id) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        long result = sqLiteDatabase.delete(TABLE_NAME, "_id=?", new String[]{row_id});
+        if (result == -1) {
+            Toast.makeText(context, "Failed to delete", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(context, "Deleted", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+    //////Loujain////////
+
+    void addPartenaire (String title, String description, int nbrPieces)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put("COLUMN_TITLE", title);
+        cv.put("COLUMN_DESC", description);
+        cv.put("COLUMN_NBR", nbrPieces);
+        long result = db.insert("my_library",null, cv);
         if(result == -1){
             Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
         }else {
             Toast.makeText(context, "Added Successfully!", Toast.LENGTH_SHORT).show();
         }
-    }
 
-    void updateData(String row_id, String brand, String year, String name, String serialNumber, String quantity, String price){
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues cv = new ContentValues();
-        cv.put(COLUMN_BRAND,brand);
-        cv.put(COLUMN_YEAR,year);
-        cv.put(COLUMN_NAME,name);
-        cv.put(COLUMN_SERIALNUMBER,serialNumber);
-        cv.put(COLUMN_QUANTITY,quantity);
-        cv.put(COLUMN_PRICE,price);
-
-       long result = db.update(TABLE_NAME, cv,"_id=?",new String[]{row_id});
-    if (result==-1){
-        Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
-    }else {
-        Toast.makeText(context, "Updated Successfully!", Toast.LENGTH_SHORT).show();
     }
+    public Cursor getDataa(){
+        SQLiteDatabase MyDB = this.getReadableDatabase();
+        Cursor cursor = MyDB.rawQuery("Select * from my_library",null);
+        return cursor;
     }
+    Cursor readAllData(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM my_library";
 
-    public void deleteProduct(String row_id){
-        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
-       long result = sqLiteDatabase.delete(TABLE_NAME,"_id=?", new String[]{row_id});
-       if (result == -1){
-           Toast.makeText(context, "Failed to delete", Toast.LENGTH_SHORT).show();
-       }else
-       {
-           Toast.makeText(context, "Deleted", Toast.LENGTH_SHORT).show();
-       }
+
+        Cursor cursor = null;
+        if(db != null){
+            cursor = db.rawQuery(query, null);
+        }
+        return cursor;
     }
 
 }
+

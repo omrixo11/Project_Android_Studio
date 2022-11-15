@@ -67,7 +67,6 @@ public class PlusFragment extends Fragment {
                             Integer.valueOf(quantity.getText().toString().trim()),
                             Integer.valueOf(price.getText().toString().trim()));
                     clear();
-
                 }
             }
 

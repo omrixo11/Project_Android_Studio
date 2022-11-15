@@ -22,7 +22,6 @@ import java.lang.reflect.Array;
 public class HomePage extends AppCompatActivity {
 
 
-
     BottomNavigationView navigationView;
 
     @Override
@@ -60,6 +59,7 @@ public class HomePage extends AppCompatActivity {
                     case R.id.profile:
                         fragment = new ProfileFragment();
                         break;
+
                 }
 
                 getSupportFragmentManager().beginTransaction().replace(R.id.body_container, fragment).commit();

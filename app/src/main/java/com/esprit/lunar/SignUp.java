@@ -51,7 +51,7 @@ public class SignUp extends AppCompatActivity {
                 String phonee = phone.getText().toString();
 
 
-                if(nomm.equals("")||prenomm.equals("")||usenamee.equals("")||emaill.equals("")||pass.equals("")||repass.equals("")||phonee.equals(""))
+                if (nomm.equals("") || prenomm.equals("") || usenamee.equals("") || emaill.equals("") || pass.equals("") || repass.equals("") || phonee.equals(""))
                     Toast.makeText(SignUp.this, "Please enter all the fields", Toast.LENGTH_SHORT).show();
                 else{
                     if(pass.equals(repass)){
@@ -60,7 +60,7 @@ public class SignUp extends AppCompatActivity {
                             Boolean insert = DB.insertData(emaill, pass);
                             if(insert==true){
                                 Toast.makeText(SignUp.this, "Registered successfully", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(getApplicationContext(),HomeActivity.class);
+                                Intent intent = new Intent(getApplicationContext(),HomePage.class);
                                 startActivity(intent);
                             }else{
                                 Toast.makeText(SignUp.this, "Registration failed", Toast.LENGTH_SHORT).show();

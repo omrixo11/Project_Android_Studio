@@ -11,11 +11,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 
 public class ProfileFragment extends Fragment {
 
-    Button btnLogout;
+    Button btnLogout,partenaire;
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
     @Override
@@ -27,6 +28,8 @@ public class ProfileFragment extends Fragment {
         preferences = this.getActivity().getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
         editor = preferences.edit();
         btnLogout = v.findViewById(R.id.btnLogout);
+        partenaire=v.findViewById(R.id.partenaire);
+
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -37,9 +40,20 @@ public class ProfileFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        partenaire.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                Intent intent = new Intent(getActivity(), PartenaireActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
         return v;
+
+
     }
 
 
