@@ -128,7 +128,4 @@
         app:layout_constraintTop_toBottomOf="@+id/price"
         tools:ignore="TouchTargetSizeCheck" />
 
-
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
