@@ -30,7 +30,7 @@ public class HomeFragment extends Fragment {
 
     DBHelper MyDB;
     SQLiteDatabase sqLiteDatabase;
-    ArrayList<String> brand, year, name, serialNumber, quantity, product_id;
+    ArrayList<String> brand, year, name, serialNumber, quantity, product_id,price;
     CustomAdapter customAdapter;
     RecyclerView recyclerView;
     SwipeRefreshLayout swipeRefreshLayout;
@@ -50,10 +50,11 @@ public class HomeFragment extends Fragment {
         name = new ArrayList<>();
         serialNumber = new ArrayList<>();
         quantity = new ArrayList<>();
+        price = new ArrayList<>();
 
         StoreDataInArrays();
 
-        customAdapter = new CustomAdapter(getActivity(), getActivity(), product_id, brand, name, year, serialNumber, quantity);
+        customAdapter = new CustomAdapter(getActivity(), getActivity(), product_id, brand, name, year, serialNumber, quantity, price);
         recyclerView.setAdapter(customAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -80,6 +81,7 @@ public class HomeFragment extends Fragment {
                 name.add(cursor.getString(3));
                 serialNumber.add(cursor.getString(4));
                 quantity.add(cursor.getString(5));
+                price.add(cursor.getString(6));
             }
         }
     }

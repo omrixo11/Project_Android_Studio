@@ -34,6 +34,7 @@ public class PlusFragment extends Fragment {
     EditText name;
     EditText serialNumber;
     EditText quantity;
+    EditText price;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,6 +47,7 @@ public class PlusFragment extends Fragment {
         name = v.findViewById(R.id.nomPiece);
         serialNumber = v.findViewById(R.id.numPiece);
         quantity = v.findViewById(R.id.quantity);
+        price = v.findViewById(R.id.price);
         btnAdd = v.findViewById(R.id.addtostock);
         MyDB = new DBHelper(getActivity());
 
@@ -55,14 +57,15 @@ public class PlusFragment extends Fragment {
             public void onClick(View v) {
 
                 DBHelper myDB = new DBHelper(getActivity());
-                if (name.length() == 0 || brand.length() == 0 || year.length() == 0 || serialNumber.length() == 0 || quantity.length() == 0) {
+                if (name.length() == 0 || brand.length() == 0 || year.length() == 0 || serialNumber.length() == 0 || quantity.length() == 0 || price.length()==0) {
                     Toast.makeText(getActivity(), "Please fill all the fields", Toast.LENGTH_SHORT).show();
                 } else {
                     myDB.addProduct(brand.getText().toString().trim(),
                             Integer.valueOf(year.getText().toString().trim()),
                             name.getText().toString().trim(),
                             Integer.valueOf(serialNumber.getText().toString().trim()),
-                            Integer.valueOf(quantity.getText().toString().trim()));
+                            Integer.valueOf(quantity.getText().toString().trim()),
+                            Integer.valueOf(price.getText().toString().trim()));
                     clear();
 
                 }
@@ -78,6 +81,7 @@ public class PlusFragment extends Fragment {
         name.setText("");
         serialNumber.setText("");
         quantity.setText("");
+        price.setText("");
     }
 
 }

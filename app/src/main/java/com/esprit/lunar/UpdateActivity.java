@@ -19,19 +19,21 @@ import android.widget.Toast;
 public class UpdateActivity extends AppCompatActivity {
 
 
-    EditText brand_input, year_input, name_input, serialNumber_input, quantity_input;
+    EditText brand_input, year_input, name_input, serialNumber_input, quantity_input, price_input;
     Button update_button,delete_button;
-    String id,brand, year,name,serialNumber,quantity;
+    String id,brand, year,name,serialNumber,quantity,price;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update);
+
 
        brand_input = findViewById(R.id.CarBrand2);
        year_input = findViewById(R.id.CarYear2);
        name_input = findViewById(R.id.nomPiece2);
        serialNumber_input = findViewById(R.id.numPiece2);
        quantity_input = findViewById(R.id.quantity2);
+       price_input = findViewById(R.id.price2);
        update_button = findViewById(R.id.update_button);
        delete_button = findViewById(R.id.delete_button);
 
@@ -54,7 +56,8 @@ public class UpdateActivity extends AppCompatActivity {
                name = name_input.getText().toString().trim();
                serialNumber = serialNumber_input.getText().toString().trim();
                quantity = quantity_input.getText().toString().trim();
-               myDB.updateData(id, brand, year, name, serialNumber, quantity);
+               price = price_input.getText().toString().trim();
+               myDB.updateData(id, brand, year, name, serialNumber, quantity, price);
            }
        });
 
@@ -62,7 +65,7 @@ public class UpdateActivity extends AppCompatActivity {
     void getAndSetIntentData(){
         if (getIntent().hasExtra("id") && getIntent().hasExtra("brand") && getIntent().hasExtra("year")
                 && getIntent().hasExtra("name") && getIntent().hasExtra("serialNumber")
-                && getIntent().hasExtra("quantity")) {
+                && getIntent().hasExtra("quantity") && getIntent().hasExtra("price")) {
 
             //get
             id = getIntent().getStringExtra("id");
@@ -71,6 +74,7 @@ public class UpdateActivity extends AppCompatActivity {
             name = getIntent().getStringExtra("name");
             serialNumber = getIntent().getStringExtra("serialNumber");
             quantity = getIntent().getStringExtra("quantity");
+            price = getIntent().getStringExtra("price");
 
             //set
             brand_input.setText(brand);
@@ -78,7 +82,8 @@ public class UpdateActivity extends AppCompatActivity {
             name_input.setText(name);
             serialNumber_input.setText(serialNumber);
             quantity_input.setText(quantity);
-            Log.d("step", brand+" "+year+" "+name+" "+serialNumber+""+quantity);
+            price_input.setText(price);
+            Log.d("step", brand+" "+year+" "+name+" "+serialNumber+""+quantity+" "+price);
 
         }else {
             Toast.makeText(this, "No Data",Toast.LENGTH_SHORT).show();

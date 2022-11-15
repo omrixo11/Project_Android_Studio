@@ -12,7 +12,7 @@
         android:id="@+id/CarBrand2"
         android:layout_width="250dp"
         android:layout_height="40dp"
-        android:layout_marginTop="112dp"
+        android:layout_marginTop="80dp"
         android:background="@drawable/textedit_background"
         android:hint="Car Brand"
         android:textAlignment="center"
@@ -92,6 +92,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/numPiece2"
         tools:ignore="TouchTargetSizeCheck" />
+    <EditText
+        android:id="@+id/price2"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="64dp"
+        android:background="@drawable/textedit_background"
+        android:ems="10"
+        android:hint="Price"
+        android:inputType="number"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/quantity2"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <Button
         android:id="@+id/update_button"
@@ -105,7 +122,7 @@
         android:textColor="#202020"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/quantity2"
+        app:layout_constraintTop_toBottomOf="@+id/price2"
         tools:ignore="TouchTargetSizeCheck" />
     <Button
         android:id="@+id/delete_button"

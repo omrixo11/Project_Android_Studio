@@ -17,10 +17,10 @@ import java.util.ArrayList;
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
 
     private Context context;
-    private ArrayList brand,year,name,serialNumber,quantity,product_id;
+    private ArrayList brand,year,name,serialNumber,quantity,product_id,price;
     Activity activity;
 
-    CustomAdapter(Activity activity, Context context,ArrayList product_id, ArrayList brand,ArrayList year,ArrayList name, ArrayList serialNumber, ArrayList quantity){
+    CustomAdapter(Activity activity, Context context,ArrayList product_id, ArrayList brand,ArrayList year,ArrayList name, ArrayList serialNumber, ArrayList quantity, ArrayList price){
 
         this.activity = activity;
         this.context = context;
@@ -30,6 +30,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         this.name = name;
         this.serialNumber = serialNumber;
         this.quantity = quantity;
+        this.price = price;
     }
 
     @NonNull
@@ -49,6 +50,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         holder.Name.setText(String.valueOf(name.get(position)));
         holder.SerialNumber.setText(String.valueOf(serialNumber.get(position)));
         holder.Quantity.setText(String.valueOf(quantity.get(position)));
+        holder.Price.setText(String.valueOf(price.get(position)));
+
 
         holder.mainLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,6 +64,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                 intent.putExtra("name",String.valueOf(name.get(position)));
                 intent.putExtra("serialNumber",String.valueOf(serialNumber.get(position)));
                 intent.putExtra("quantity",String.valueOf(quantity.get(position)));
+                intent.putExtra("price",String.valueOf(price.get(position)));
                 activity.startActivityForResult(intent,1);
 
 
@@ -74,7 +78,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView Product_id, Brand,Year,Name,SerialNumber,Quantity;
+        TextView Product_id, Brand,Year,Name,SerialNumber,Quantity,Price;
         LinearLayout mainLayout;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -84,6 +88,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             Name = itemView.findViewById(R.id.Name);
             SerialNumber = itemView.findViewById(R.id.SerialNumber);
             Quantity = itemView.findViewById(R.id.Quantity);
+            Price = itemView.findViewById(R.id.Price);
             mainLayout = itemView.findViewById(R.id.mainLayout);
 
         }

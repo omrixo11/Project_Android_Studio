@@ -61,6 +61,16 @@
         android:layout_below="@+id/SerialNumber"
         android:text="Quantity   :  "
         android:textColor="@color/white"/>
+        <TextView
+            android:id="@+id/Price"
+            android:paddingLeft="100dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/Quantity"
+            android:text="Price   :  "
+            android:textColor="@color/white"/>
     <TextView
         android:id="@+id/brandd"
         android:layout_width="wrap_content"
@@ -110,6 +120,16 @@
         android:layout_below="@+id/SerialNumber"
         android:text="Quantity           :  "
         android:textColor="@color/white"/>
+        <TextView
+            android:id="@+id/Pricee"
+            android:paddingLeft="0dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/Quantityy"
+            android:text="Price                :  "
+            android:textColor="@color/white"/>
 
         <TextView
             android:id="@+id/Product_id"

@@ -20,6 +20,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String COLUMN_NAME = "name";
     private static final String COLUMN_SERIALNUMBER = "serialNumber";
     private static final String COLUMN_QUANTITY = "quantity";
+    private static final String COLUMN_PRICE = "price";
 
     DBHelper(Context context ) {
         super(context, DBNAME, null, DATABASE_VERSION);
@@ -37,7 +38,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 COLUMN_YEAR + " INTEGER, " +
                 COLUMN_NAME + " TEXT, " +
                 COLUMN_SERIALNUMBER + " INTEGER, " +
-                COLUMN_QUANTITY + " INTEGER);";
+                COLUMN_QUANTITY + " INTEGER, " +
+                COLUMN_PRICE + " INTEGER);";
         MyDB.execSQL(query);
     }
 
@@ -83,7 +85,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
-    void addProduct(String brand, int year, String name, int serialNumber, int quantity){
+    void addProduct(String brand, int year, String name, int serialNumber, int quantity, int price){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
@@ -92,6 +94,7 @@ public class DBHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_NAME, name);
         cv.put(COLUMN_SERIALNUMBER, serialNumber);
         cv.put(COLUMN_QUANTITY, quantity);
+        cv.put(COLUMN_PRICE, price);
         long result = db.insert(TABLE_NAME,null, cv);
         if(result == -1){
             Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
@@ -100,7 +103,7 @@ public class DBHelper extends SQLiteOpenHelper {
         }
     }
 
-    void updateData(String row_id, String brand, String year, String name, String serialNumber, String quantity){
+    void updateData(String row_id, String brand, String year, String name, String serialNumber, String quantity, String price){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(COLUMN_BRAND,brand);
@@ -108,6 +111,7 @@ public class DBHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_NAME,name);
         cv.put(COLUMN_SERIALNUMBER,serialNumber);
         cv.put(COLUMN_QUANTITY,quantity);
+        cv.put(COLUMN_PRICE,price);
 
        long result = db.update(TABLE_NAME, cv,"_id=?",new String[]{row_id});
     if (result==-1){
