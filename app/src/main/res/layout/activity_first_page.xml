@@ -6,7 +6,12 @@
     android:layout_height="match_parent"
     android:background="#202020"
     tools:context=".FirstPage">
+    <VideoView
+        android:id="@+id/videoVeiw"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
+    </VideoView>
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="138dp"

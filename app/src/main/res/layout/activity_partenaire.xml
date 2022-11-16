@@ -4,52 +4,56 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#070707"
+    android:background="@color/bg_color"
     android:orientation="vertical"
     android:padding="30dp"
     tools:context=".PartenaireActivity">
 
     <EditText
+        android:layout_marginTop="50dp"
         android:id="@+id/titleeee"
-        android:layout_width="358dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
-        android:backgroundTint="#F1ECEC"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:background="@drawable/textedit_background"
         android:ems="10"
-        android:hint="Spansor Name"
-        android:inputType="textPersonName"
-        android:textColor="#FFFFFF"
-        android:textColorHint="#ECE3E3"
+        android:hint="Partner name"
+        android:inputType="number"
+        android:textAlignment="center"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:ignore="TouchTargetSizeCheck" />
 
     <EditText
         android:id="@+id/nbrPieces"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="#F1ECEC"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:background="@drawable/textedit_background"
         android:ems="10"
-        android:hint="Number of pieces"
+        android:hint="Quantity"
         android:inputType="number"
-        android:textColor="#FFFFFF"
-        android:textColorHint="#FBFBFB"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/author_input" />
+        tools:ignore="TouchTargetSizeCheck"
+        app:layout_constraintTop_toBottomOf="@+id/titleeee"
+        />
 
     <Button
         android:id="@+id/add_button"
+        android:layout_height="40dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="100dp"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_marginTop="40dp"
         android:background="@drawable/button_background"
-        android:text="Add"
-        android:textAllCaps="false"
+        android:textColor="#202020"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pages_input" />
+        app:layout_constraintTop_toBottomOf="@+id/nbrPieces"
+        android:text="Add" />
 
 </LinearLayout>

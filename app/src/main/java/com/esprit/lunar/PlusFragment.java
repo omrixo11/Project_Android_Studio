@@ -25,8 +25,7 @@ import java.util.List;
 
 public class PlusFragment extends Fragment {
 
-    int id = 0;
-    SQLiteDatabase sqLiteDatabase;
+
     DBHelper MyDB;
     Button btnAdd;
     EditText brand;
@@ -55,7 +54,6 @@ public class PlusFragment extends Fragment {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 DBHelper myDB = new DBHelper(getActivity());
                 if (name.length() == 0 || brand.length() == 0 || year.length() == 0 || serialNumber.length() == 0 || quantity.length() == 0 || price.length()==0) {
                     Toast.makeText(getActivity(), "Please fill all the fields", Toast.LENGTH_SHORT).show();

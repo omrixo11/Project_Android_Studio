@@ -13,7 +13,8 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
         <androidx.recyclerview.widget.RecyclerView
-            android:paddingBottom="50dp"
+            android:paddingTop="30dp"
+            android:paddingBottom="100dp"
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -21,6 +22,12 @@
 
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="20dp"
+            android:paddingRight="20dp">
 
+        </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

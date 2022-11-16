@@ -1,21 +1,22 @@
 package com.esprit.lunar;
 
-import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
 
+import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.SearchView;
 import android.widget.Toast;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
@@ -24,11 +25,12 @@ public class HomeFragment extends Fragment {
 
 
     DBHelper MyDB;
+
     ArrayList<String> brand, year, name, serialNumber, quantity, product_id, price;
     DisplayAdapter displayAdapter;
     RecyclerView recyclerView;
     SwipeRefreshLayout swipeRefreshLayout;
-    Button btnCard;
+
 
 
     @Override
@@ -36,7 +38,6 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_home, container, false);
 
-        btnCard = v.findViewById(R.id.btnCard);
         swipeRefreshLayout = v.findViewById(R.id.swiperLayout);
         recyclerView = v.findViewById(R.id.recyclerView);
         MyDB = new DBHelper(getActivity());
@@ -55,7 +56,7 @@ public class HomeFragment extends Fragment {
         recyclerView.setAdapter(displayAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-
+        //////
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -63,6 +64,7 @@ public class HomeFragment extends Fragment {
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
+        //////
 
 
         return v;
@@ -84,6 +86,5 @@ public class HomeFragment extends Fragment {
             }
         }
     }
-
 
 }

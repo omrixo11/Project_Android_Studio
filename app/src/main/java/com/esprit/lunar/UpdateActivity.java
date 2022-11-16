@@ -20,49 +20,72 @@ public class UpdateActivity extends AppCompatActivity {
 
 
     EditText brand_input, year_input, name_input, serialNumber_input, quantity_input, price_input;
-    Button update_button,delete_button;
-    String id,brand, year,name,serialNumber,quantity,price;
+    EditText brandc, yearc, namec, serialNumberc, quantityc, pricec;
+    Button update_button, delete_button, addToCart;
+    String id, brand, year, name, serialNumber, quantity, price;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update);
 
+        addToCart = findViewById(R.id.AddToCart);
+        brand_input = findViewById(R.id.CarBrand2);
+        year_input = findViewById(R.id.CarYear2);
+        name_input = findViewById(R.id.nomPiece2);
+        serialNumber_input = findViewById(R.id.numPiece2);
+        quantity_input = findViewById(R.id.quantity2);
+        price_input = findViewById(R.id.price2);
 
-       brand_input = findViewById(R.id.CarBrand2);
-       year_input = findViewById(R.id.CarYear2);
-       name_input = findViewById(R.id.nomPiece2);
-       serialNumber_input = findViewById(R.id.numPiece2);
-       quantity_input = findViewById(R.id.quantity2);
-       price_input = findViewById(R.id.price2);
-       update_button = findViewById(R.id.update_button);
-       delete_button = findViewById(R.id.delete_button);
+        brandc = findViewById(R.id.CarBrand2);
+        yearc = findViewById(R.id.CarYear2);
+        namec = findViewById(R.id.nomPiece2);
+        serialNumberc = findViewById(R.id.numPiece2);
+        quantityc = findViewById(R.id.quantity2);
+        pricec = findViewById(R.id.price2);
 
-       getAndSetIntentData();
+        update_button = findViewById(R.id.update_button);
+        delete_button = findViewById(R.id.delete_button);
+        addToCart = findViewById(R.id.AddToCart);
+        getAndSetIntentData();
 
-       delete_button.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               confirmDialog();
+        delete_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                confirmDialog();
 
-           }
-       });
+            }
+        });
 
         update_button.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               DBHelper myDB = new DBHelper(UpdateActivity.this);
-               brand = brand_input.getText().toString().trim();
-               year = year_input.getText().toString().trim();
-               name = name_input.getText().toString().trim();
-               serialNumber = serialNumber_input.getText().toString().trim();
-               quantity = quantity_input.getText().toString().trim();
-               price = price_input.getText().toString().trim();
-               myDB.updateData(id, brand, year, name, serialNumber, quantity, price);
-           }
-       });
+            @Override
+            public void onClick(View v) {
+                DBHelper myDB = new DBHelper(UpdateActivity.this);
+                brand = brand_input.getText().toString().trim();
+                year = year_input.getText().toString().trim();
+                name = name_input.getText().toString().trim();
+                serialNumber = serialNumber_input.getText().toString().trim();
+                quantity = quantity_input.getText().toString().trim();
+                price = price_input.getText().toString().trim();
+                myDB.updateData(id, brand, year, name, serialNumber, quantity, price);
+            }
+        });
+        addToCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                DBHelper myDB = new DBHelper(getBaseContext());
+                myDB.addToCart(brandc.getText().toString().trim(),
+                        Integer.valueOf(yearc.getText().toString().trim()),
+                        namec.getText().toString().trim(),
+                        Integer.valueOf(serialNumberc.getText().toString().trim()),
+                        Integer.valueOf(quantityc.getText().toString().trim()),
+                        Integer.valueOf(pricec.getText().toString().trim()));
+            }
+        });
     }
-    void getAndSetIntentData(){
+
+    void getAndSetIntentData() {
         if (getIntent().hasExtra("id") && getIntent().hasExtra("brand") && getIntent().hasExtra("year")
                 && getIntent().hasExtra("name") && getIntent().hasExtra("serialNumber")
                 && getIntent().hasExtra("quantity") && getIntent().hasExtra("price")) {
@@ -83,16 +106,16 @@ public class UpdateActivity extends AppCompatActivity {
             serialNumber_input.setText(serialNumber);
             quantity_input.setText(quantity);
             price_input.setText(price);
-            Log.d("step", brand+" "+year+" "+name+" "+serialNumber+""+quantity+" "+price);
-
-        }else {
-            Toast.makeText(this, "No Data",Toast.LENGTH_SHORT).show();
+            Log.d("step", brand + " " + year + " " + name + " " + serialNumber + "" + quantity + " " + price);
+        } else {
+            Toast.makeText(this, "No Data", Toast.LENGTH_SHORT).show();
         }
     }
-    void confirmDialog(){
+
+    void confirmDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Delete" + brand + "?");
-        builder.setMessage("Are you sure you want to delete "+ brand + "?");
+        builder.setMessage("Are you sure you want to delete " + brand + "?");
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

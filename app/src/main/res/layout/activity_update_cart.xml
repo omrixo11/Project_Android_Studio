@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/bg_color"
+    tools:context=".UpdateCart">
+
+    <EditText
+        android:id="@+id/CarBrand3"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/textedit_background"
+        android:hint="Car Brand"
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="14sp"
+        tools:ignore="TouchTargetSizeCheck"/>
+
+    <EditText
+        android:id="@+id/CarYear3"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/textedit_background"
+        android:hint="Car year"
+        android:inputType="number"
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/CarBrand3"
+        android:textSize="14sp"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <EditText
+        android:id="@+id/nomPiece3"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="64dp"
+        android:background="@drawable/textedit_background"
+        android:ems="10"
+        android:hint="Part name"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/CarYear3"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <EditText
+        android:id="@+id/numPiece3"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="64dp"
+        android:background="@drawable/textedit_background"
+        android:ems="10"
+        android:hint="Part serial number"
+        android:inputType="number"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nomPiece3"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <EditText
+        android:id="@+id/quantity3"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="64dp"
+        android:background="@drawable/textedit_background"
+        android:ems="10"
+        android:hint="Quantity"
+        android:inputType="number"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/numPiece3"
+        tools:ignore="TouchTargetSizeCheck" />
+    <EditText
+        android:id="@+id/price3"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="64dp"
+        android:background="@drawable/textedit_background"
+        android:ems="10"
+        android:hint="Price"
+        android:inputType="number"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/quantity3"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <Button
+
+        android:id="@+id/update_button3"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginEnd="100dp"
+        android:background="@drawable/button_background"
+        android:text="Update"
+        android:textColor="#202020"
+        android:layout_marginTop="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/price3"
+        tools:ignore="MissingConstraints,TouchTargetSizeCheck" />
+
+    <Button
+        android:id="@+id/delete_button3"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="100dp"
+        android:background="@drawable/button_background"
+        android:text="Delete"
+        android:textColor="#202020"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/update_button3"
+        tools:ignore="TouchTargetSizeCheck" />
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
