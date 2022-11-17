@@ -168,6 +168,24 @@ public class DBHelper extends SQLiteOpenHelper {
             Toast.makeText(context, "Updated Successfully!", Toast.LENGTH_SHORT).show();
         }
     }
+    void updateDataCard(String row_idc, String brandc, String yearc, String namec, String serialNumberc, String quantityc, String pricec) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(COLUMN_BRANDC, brandc);
+        cv.put(COLUMN_YEARC, yearc);
+        cv.put(COLUMN_NAMEC, namec);
+        cv.put(COLUMN_SERIALNUMBERC, serialNumberc);
+        cv.put(COLUMN_QUANTITYC, quantityc);
+        cv.put(COLUMN_PRICEC, pricec);
+
+        long result = db.update(TABLE_CART, cv, "_idc=?", new String[]{row_idc});
+        if (result == -1) {
+            Toast.makeText(context, "Failed to update cart", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(context, "Cart pdated Successfully!", Toast.LENGTH_SHORT).show();
+        }
+    }
 
     public void deleteProduct(String row_id) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();

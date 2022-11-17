@@ -10,6 +10,7 @@
     <!-- TODO: Update blank fragment layout -->
 
     <GridLayout
+        android:id="@+id/gridLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -24,15 +25,16 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_margin="0dp"
+            android:padding="5dp"
             android:src="@drawable/action_hero"
             app:shapeAppearanceOverlay="@style/roundedImageStyle"
-            tools:layout_editor_absoluteX="42dp"
-            tools:layout_editor_absoluteY="41dp"
-            android:padding="5dp"
+            app:strokeColor="@color/yellow"
             app:strokeWidth="5dp"
-            app:strokeColor="@color/yellow"/>
+            tools:layout_editor_absoluteX="42dp"
+            tools:layout_editor_absoluteY="41dp" />
 
         <TextView
+            android:id="@+id/textview1"
             android:layout_row="0"
             android:layout_column="1"
             android:layout_marginLeft="20dp"
@@ -52,20 +54,24 @@
         android:textColor="#202020"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.534"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.786"
+        app:layout_constraintTop_toBottomOf="@+id/partenaire"
+        app:layout_constraintVertical_bias="0.093"
         tools:ignore="TouchTargetSizeCheck" />
+
     <Button
         android:id="@+id/partenaire"
-        android:layout_width="74dp"
-        android:layout_height="53dp"
+        android:layout_width="125dp"
+        android:layout_height="33dp"
+        android:layout_marginTop="200dp"
         android:background="@drawable/button_background"
-        android:text="+"
-        tools:ignore="TouchTargetSizeCheck"
-        tools:layout_editor_absoluteX="321dp"
-        tools:layout_editor_absoluteY="582dp" />
+        android:gravity="center"
+        android:text="Add partner"
+        android:textColor="#202020"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gridLayout"
+        tools:ignore="TouchTargetSizeCheck" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

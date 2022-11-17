@@ -53,7 +53,7 @@ public class UpdateCart extends AppCompatActivity {
                 serialNumberc = serialNumber_inputc.getText().toString().trim();
                 quantityc = quantity_inputc.getText().toString().trim();
                 pricec = price_inputc.getText().toString().trim();
-                myDB.updateData(idc, brandc, yearc, namec, serialNumberc, quantityc, pricec);
+                myDB.updateDataCard(idc, brandc, yearc, namec, serialNumberc, quantityc, pricec);
             }
         });
     }
@@ -97,7 +97,7 @@ public class UpdateCart extends AppCompatActivity {
                 myDB.deleteCart(idc);
             }
         });
-        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
             }
